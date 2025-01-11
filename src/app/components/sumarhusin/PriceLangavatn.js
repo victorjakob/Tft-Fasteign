@@ -1,0 +1,102 @@
+"use client";
+
+import { motion } from "framer-motion";
+
+const fadeInVariant = (direction) => ({
+  hidden: {
+    opacity: 0,
+    x: direction === "left" ? -100 : 100,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+    },
+  },
+});
+
+export default function Price() {
+  return (
+    <section className="py-16 bg-[#957F54]">
+      <div className="container mx-auto px-4 lg:max-w-6xl">
+        <motion.div
+          className="flex flex-col items-center md:flex-row md:items-start md:justify-between gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          {/* Price Section */}
+          <motion.div
+            className="border-r w-full max-w-md mx-auto text-center md:text-left md:w-1/2"
+            variants={fadeInVariant("left")}
+          >
+            <h3 className="text-3xl md:text-4xl font-medium text-white tracking-wide mb-8">
+              VERÐ
+            </h3>
+            <div className="space-y-8 text-main">
+              {[
+                {
+                  size: "55 m²",
+                  priceWithoutVAT: "9.980.000 kr.",
+                  priceWithVAT: "12.375.000 kr.",
+                },
+                {
+                  size: "88 m²",
+                  priceWithoutVAT: "13.800.000 kr.",
+                  priceWithVAT: "17.112.000 kr.",
+                },
+                {
+                  size: "120 m²",
+                  priceWithoutVAT: "19.500.000 kr.",
+                  priceWithVAT: "24.180.000 kr.",
+                },
+              ].map((item, index) => (
+                <div key={index} className="">
+                  <h4 className="text-2xl font-extralight text-white/90 mb-1">
+                    {item.size}
+                  </h4>
+                  <div className="flex justify-center md:justify-start items-center mb-2">
+                    <span className="text-xl font-medium pr-3">
+                      {item.priceWithoutVAT}
+                    </span>
+                    <span className="text-sm opacity-75">Án VSK</span>
+                  </div>
+                  <div className="flex justify-center md:justify-start items-center">
+                    <span className="text-xl font-medium pr-3">
+                      {item.priceWithVAT}
+                    </span>
+                    <span className="text-sm opacity-75">Með VSK</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Delivery Section */}
+          <motion.div
+            className="w-full max-w-md mx-auto text-center md:text-left md:w-1/2"
+            variants={fadeInVariant("right")}
+          >
+            <div className="text-main text-lg space-y-4">
+              <h3 className=" font-medium  text-3xl">Afhending</h3>
+              <p>Miðast við á Hafnarbakka í Reykjavík</p>
+              <p>Húsin eru ósamsett</p>
+              <p className="pb-2">
+                Grind í útveggjum er forsmíðuð við afhendingu
+              </p>
+              <h3 className="text-3xl font-medium">Samstarf</h3>
+              <p>Smiðir sem setja saman húsin (Breyting ehf)</p>
+              <p>
+                Kranaþjónusta tekur að sér að flytja og hýfa einingar á
+                endanlegum stað
+              </p>
+              <p>- Við getum hjálpað þér með ferlið -</p>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
