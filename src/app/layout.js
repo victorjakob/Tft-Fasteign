@@ -17,6 +17,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Viewport meta tag for mobile responsiveness */}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no"
+        />
+      </head>
       <body className={`${archivo.variable}  antialiased`}>
         <Topbar />
         {children}
