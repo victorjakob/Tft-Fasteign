@@ -59,9 +59,9 @@ export default function Form() {
           <input
             type="text"
             id="name"
-            className={`block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border ${
+            className={`block p-3 w-full text-sm bg-gray-50 text-gray-900 rounded-lg border ${
               errors.name ? "border-red-500" : "border-gray-300"
-            } shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white`}
+            } shadow-sm focus:ring-blue-500 focus:border-blue-500 appearance-none outline-none`}
             placeholder="Nafn"
             {...register("name", {
               required: "Name is required",
@@ -73,13 +73,14 @@ export default function Form() {
         </div>
 
         {/* Email Field */}
+
         <div>
           <input
             type="email"
             id="email"
-            className={`shadow-sm bg-gray-50 border ${
+            className={`block p-3 w-full text-sm bg-gray-50 text-gray-900 rounded-lg border ${
               errors.email ? "border-red-500" : "border-gray-300"
-            } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-white`}
+            } shadow-sm focus:ring-blue-500 focus:border-blue-500 appearance-none outline-none`}
             placeholder="Email"
             {...register("email", {
               required: "Email is required",
@@ -95,13 +96,14 @@ export default function Form() {
         </div>
 
         {/* Message Field */}
+
         <div>
           <textarea
             id="message"
             rows="6"
-            className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border ${
+            className={`block p-3 w-full text-sm bg-gray-50 text-gray-900 rounded-lg border ${
               errors.message ? "border-red-500" : "border-gray-300"
-            } focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white`}
+            } shadow-sm focus:ring-blue-500 focus:border-blue-500 appearance-none outline-none`}
             placeholder="Skilaboð..."
             {...register("message", {
               required: "Message is required",

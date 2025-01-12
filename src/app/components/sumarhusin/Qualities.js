@@ -61,7 +61,7 @@ export default function Qualities() {
   }, [fullscreenImage]);
 
   return (
-    <section className="py-16 bg-[#FCF8ED]">
+    <section className="py-16 bg-[#FCF8ED] overflow-hidden">
       <div className="container mx-auto px-4 lg:max-w-6xl space-y-16">
         {/* First Section */}
         <motion.div

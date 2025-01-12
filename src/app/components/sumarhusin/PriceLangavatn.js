@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const fadeInVariant = (direction) => ({
   hidden: {
     opacity: 0,
-    x: direction === "left" ? -100 : 100,
+    x: direction === "left" ? -50 : 50, // Reduced offset to prevent overflow
   },
   visible: {
     opacity: 1,
@@ -19,7 +19,7 @@ const fadeInVariant = (direction) => ({
 
 export default function Price() {
   return (
-    <section className="py-16 bg-[#957F54]">
+    <section className="py-16 bg-[#957F54] overflow-hidden">
       <div className="container mx-auto px-4 lg:max-w-6xl">
         <motion.div
           className="flex flex-col items-center md:flex-row md:items-start md:justify-between gap-8"
@@ -29,7 +29,7 @@ export default function Price() {
         >
           {/* Price Section */}
           <motion.div
-            className="border-r w-full max-w-md mx-auto text-center md:text-left md:w-1/2"
+            className="border-b pb-10 md:pb-0 md:border-b-0 md:border-r w-full max-w-md mx-auto text-center md:text-left md:w-1/2"
             variants={fadeInVariant("left")}
           >
             <h3 className="text-3xl md:text-4xl font-medium text-white tracking-wide mb-8">
