@@ -9,15 +9,15 @@ export default function HeroHome() {
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <div
-      className="relative w-full h-screen bg-cover bg-center"
-      style={{
-        backgroundImage: "url('/home/sumarhus-fasteign.jpg')", // Path to your image
-        backgroundPosition: "center center", // Ensure centering
-        backgroundSize: "cover", // Ensure covering
-        backgroundAttachment: "scroll", // Avoid issues with bg-fixed on iOS
-      }}
-    >
+    <div className="relative w-full h-screen">
+      <div
+        className="fixed inset-0 bg-cover bg-center -z-10"
+        style={{
+          backgroundImage: "url('/home/sumarhus-fasteign.jpg')", // Path to your image
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        }}
+      ></div>
       {/* Overlay Content */}
       <div className="space-y-10 absolute inset-0 bg-black bg-opacity-30 flex flex-col items-center justify-center px-4">
         <motion.h1

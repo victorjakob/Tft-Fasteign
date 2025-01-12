@@ -37,7 +37,7 @@ export default function About() {
   const inViewImage = useInView(refImage, { once: true });
 
   return (
-    <div className="py-20">
+    <div className="py-20 bg-background">
       <div
         className=" container mx-auto flex flex-col md:flex-row 
       items-start justify-between px-6 md:px-12"
