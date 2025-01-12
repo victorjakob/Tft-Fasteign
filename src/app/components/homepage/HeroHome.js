@@ -10,9 +10,12 @@ export default function HeroHome() {
 
   return (
     <div
-      className="relative w-full h-screen bg-fixed bg-cover bg-center"
+      className="relative w-full h-screen bg-cover bg-center"
       style={{
         backgroundImage: "url('/home/sumarhus-fasteign.jpg')", // Path to your image
+        backgroundPosition: "center center", // Ensure centering
+        backgroundSize: "cover", // Ensure covering
+        backgroundAttachment: "scroll", // Avoid issues with bg-fixed on iOS
       }}
     >
       {/* Overlay Content */}
