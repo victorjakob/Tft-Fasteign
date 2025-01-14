@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image"; // Import Image
 
 export default function About() {
   // Variants for the motion animation
@@ -39,11 +40,11 @@ export default function About() {
   return (
     <div className="py-20 bg-background">
       <div
-        className=" container mx-auto flex flex-col md:flex-row 
+        className="container mx-auto flex flex-col md:flex-row 
       items-start justify-between px-6 md:px-12"
       >
         {/* Left Section: Texts */}
-        <div className="tracking-widest  italic md:w-1/2 md:space-y-12 lg:space-y-16 my-auto text-left">
+        <div className="tracking-widest italic md:w-1/2 md:space-y-12 lg:space-y-16 my-auto text-left">
           {/* First Element */}
           <motion.div
             ref={ref1}
@@ -84,15 +85,17 @@ export default function About() {
         {/* Right Section: Image */}
         <motion.div
           ref={refImage}
-          className="w-72 h-72 md:w-96 md:h-96 lg:w-[490px] lg:h-[490px] rounded-full object-cover border border-black -mb-16"
+          className="w-72 h-72 mx-auto md:w-96 md:h-96 lg:w-[490px] lg:h-[490px] rounded-full object-cover  my-auto"
           variants={imgVariants}
           initial="hidden"
           animate={inViewImage ? "visible" : "hidden"}
         >
-          <img
-            src="/home/sumarhus-design.jpg" // Replace with your image path
+          <Image
+            src="/home/sumarhus-design.jpg"
             alt="Circular Image"
-            className="w-full h-full rounded-full object-cover"
+            width={490} // Largest size for responsive scaling
+            height={490} // Match largest size
+            className="rounded-full object-cover"
           />
         </motion.div>
       </div>

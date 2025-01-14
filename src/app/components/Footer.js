@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -10,10 +11,13 @@ export default function Footer() {
             href="/"
             className="flex justify-center sm:justify-start items-center mb-4 sm:mb-0"
           >
-            <img
+            <Image
               src="/tft-fasteign-logo.png"
-              className="h-14 md:h-16"
               alt="TFT Fasteign Logo"
+              width={150}
+              height={75}
+              className="h-14 md:h-16 object-contain"
+              priority
             />
           </Link>
 
