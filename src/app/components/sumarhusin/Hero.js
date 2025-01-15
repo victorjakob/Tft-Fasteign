@@ -13,7 +13,7 @@ export default function HeroSumarhus() {
       style={{ opacity }} // Apply dynamic opacity
     >
       <h1 className="text-3xl md:text-5xl lg:text-6xl font-light leading-snug tracking-wide">
-        Vandgerð sumarhús <br />
+        Vönduð Sumarhús <br />
         <span className="italic">eftir þinni þörf</span>
       </h1>
       <span className="text-sm md:text-lg mt-4 md:mt-8">

@@ -10,10 +10,44 @@ export default function ContactForm() {
     message: "",
   });
 
-  const handleSubmit = (e) => {
+  const [responseMessage, setResponseMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: "viggijakob@gmail.com", // Replace with your recipient email
+          subject: `New Message from ${formData.name}`, // Dynamic subject
+          text: formData.message,
+          html: `
+            <p><strong>Name:</strong> ${formData.name}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Message:</strong></p>
+            <p>${formData.message}</p>
+          `,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setResponseMessage("Your message has been sent successfully!");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setResponseMessage("Failed to send the message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setResponseMessage("An error occurred. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -25,7 +59,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="py-16 pt-40s opacity-90">
+    <section className="py-16 pt-40 opacity-90">
       <div className="container mx-auto px-4 max-w-2xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -94,10 +128,17 @@ export default function ContactForm() {
 
             <button
               type="submit"
+              disabled={loading}
               className="w-full tracking-widest bg-[#2c73e5] text-white py-3 px-6 rounded-md hover:bg-[#2054a8] transition duration-200 font-medium"
             >
-              SENDA
+              {loading ? "Sending..." : "SENDA"}
             </button>
+
+            {responseMessage && (
+              <p className="text-center text-sm mt-4 text-main">
+                {responseMessage}
+              </p>
+            )}
           </form>
         </motion.div>
       </div>
