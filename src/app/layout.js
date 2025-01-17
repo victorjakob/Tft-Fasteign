@@ -2,7 +2,7 @@ import { Archivo } from "next/font/google"; // Replace with Archivo
 import "./globals.css";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
-import { GoogleAnalytics } from "nextjs-google-analytics";
+import Analytics from "./components/Analytics";
 
 // Import Archivo fonts
 const archivo = Archivo({
@@ -60,7 +60,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="is">
       <head>
-        <GoogleAnalytics trackPageViews />
+        <Analytics />
 
         {/* Favicon links */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
