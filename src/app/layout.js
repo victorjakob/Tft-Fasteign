@@ -2,7 +2,6 @@ import { Archivo } from "next/font/google"; // Replace with Archivo
 import "./globals.css";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
-import Analytics from "./components/Analytics";
 
 // Import Archivo fonts
 const archivo = Archivo({
@@ -60,8 +59,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="is">
       <head>
-        <Analytics />
-
+        {/* Google Analytics */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-VB19NHE62T"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-VB19NHE62T');
+              `,
+          }}
+        />
         {/* Favicon links */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link
