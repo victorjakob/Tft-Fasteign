@@ -6,16 +6,47 @@ import { useEffect, useState } from "react";
 
 export default function Form() {
   const [inView, setInView] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
 
   const {
     register,
     handleSubmit,
+    reset, // Resets form fields
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form Data:", data);
-    alert("Message sent!");
+  const onSubmit = async (data) => {
+    setLoading(true);
+    setResponseMessage(""); // Clear previous messages
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          message: data.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setResponseMessage("Your message has been sent successfully!");
+        reset(); // Clear form fields after successful submission
+      } else {
+        setResponseMessage(
+          result.error || "Failed to send the message. Please try again."
+        );
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setResponseMessage("An error occurred. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Check if the form is in view
@@ -73,7 +104,6 @@ export default function Form() {
         </div>
 
         {/* Email Field */}
-
         <div>
           <input
             type="email"
@@ -96,7 +126,6 @@ export default function Form() {
         </div>
 
         {/* Message Field */}
-
         <div>
           <textarea
             id="message"
@@ -119,10 +148,28 @@ export default function Form() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="py-1 border text-main tracking-widest w-full font-extralight text-lg rounded-md hover:bg-slate-950 hover:bg-opacity-30"
+          disabled={loading}
+          className={`py-1 border tracking-widest w-full font-extralight text-lg rounded-md transition ${
+            loading
+              ? "bg-blue-300 text-gray-500"
+              : "text-main hover:bg-slate-950 hover:bg-opacity-30"
+          }`}
         >
-          SENDA SKILABOÐ
+          {loading ? "Sending..." : "SENDA SKILABOÐ"}
         </button>
+
+        {/* Response Message */}
+        {responseMessage && (
+          <p
+            className={`mt-4 text-center text-sm ${
+              responseMessage.includes("successfully")
+                ? "text-green-500"
+                : "text-red-500"
+            }`}
+          >
+            {responseMessage}
+          </p>
+        )}
       </form>
     </motion.section>
   );

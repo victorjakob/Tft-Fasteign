@@ -9,9 +9,9 @@ export default function ContactForm() {
     email: "",
     message: "",
   });
-
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false); // Track success state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,26 +21,25 @@ export default function ContactForm() {
       const response = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          to: "viggijakob@gmail.com", // Replace with your recipient email
-          subject: `New Message from ${formData.name}`, // Dynamic subject
-          text: formData.message,
-          html: `
-            <p><strong>Name:</strong> ${formData.name}</p>
-            <p><strong>Email:</strong> ${formData.email}</p>
-            <p><strong>Message:</strong></p>
-            <p>${formData.message}</p>
-          `,
-        }),
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (response.ok) {
+        setSuccess(true); // Set success state
         setResponseMessage("Your message has been sent successfully!");
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", message: "" }); // Reset form data
+
+        // Revert success state after 3 seconds
+        setTimeout(() => {
+          setSuccess(false);
+          setResponseMessage(""); // Clear the response message
+        }, 3000);
       } else {
-        setResponseMessage("Failed to send the message. Please try again.");
+        setResponseMessage(
+          data.error || "Failed to send the message. Please try again."
+        );
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -128,14 +127,22 @@ export default function ContactForm() {
 
             <button
               type="submit"
-              disabled={loading}
-              className="w-full tracking-widest bg-[#2c73e5] text-white py-3 px-6 rounded-md hover:bg-[#2054a8] transition duration-200 font-medium"
+              disabled={loading || success} // Disable when loading or success
+              className={`w-full tracking-widest py-3 px-6 rounded-md transition duration-200 font-medium ${
+                success
+                  ? "bg-green-500 text-white hover:bg-green-600"
+                  : "bg-[#2c73e5] text-white hover:bg-[#2054a8]"
+              }`}
             >
-              {loading ? "Sending..." : "SENDA"}
+              {loading ? "Sending..." : success ? "Success" : "SENDA"}
             </button>
 
             {responseMessage && (
-              <p className="text-center text-sm mt-4 text-main">
+              <p
+                className={`text-center text-sm mt-4 ${
+                  success ? "text-green-500" : "text-main"
+                }`}
+              >
                 {responseMessage}
               </p>
             )}

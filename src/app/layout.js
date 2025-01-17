@@ -2,6 +2,8 @@ import { Archivo } from "next/font/google"; // Replace with Archivo
 import "./globals.css";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
+import { GoogleAnalytics } from "nextjs-google-analytics";
+
 // Import Archivo fonts
 const archivo = Archivo({
   variable: "--font-archivo-sans",
@@ -57,6 +59,38 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="is">
+      <head>
+        <GoogleAnalytics trackPageViews />
+
+        {/* Favicon links */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-16x16.png"
+          sizes="16x16"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-32x32.png"
+          sizes="32x32"
+        />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/android-chrome-192x192.png"
+          sizes="192x192"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/android-chrome-512x512.png"
+          sizes="512x512"
+        />
+      </head>
       <body className={`${archivo.variable}  antialiased`}>
         <Topbar />
         {children}
