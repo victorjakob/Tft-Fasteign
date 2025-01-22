@@ -1,19 +1,18 @@
-import { Archivo } from "next/font/google"; // Replace with Archivo
+import { Libre_Bodoni } from "next/font/google"; // Import Libre Bodoni
 import "./globals.css";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 
 // Import Archivo fonts
-const archivo = Archivo({
-  variable: "--font-archivo-sans",
+const libreBodoni = Libre_Bodoni({
+  variable: "--font-libre-bodoni", // Update variable name
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500"], // Specify the weights you want
+  weight: ["400", "500", "700"], // Specify weights available for Libre Bodoni
 });
 
 export const metadata = {
   title: {
-    default:
-      "TFT Fasteign - Sumarhús, Vistvæn timburhús, Tilbúin til uppsetningar",
+    default: "MiniMax",
     template: "%s - TFT Fasteign - Sumarhús", // Dynamic title templates
   },
   description: "Frábær timburhús tilbúin til byggingar",
@@ -74,36 +73,8 @@ export default function RootLayout({ children }) {
               `,
           }}
         />
-        {/* Favicon links */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link
-          rel="icon"
-          type="image/png"
-          href="/favicon-16x16.png"
-          sizes="16x16"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          href="/favicon-32x32.png"
-          sizes="32x32"
-        />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <link
-          rel="icon"
-          type="image/png"
-          href="/android-chrome-192x192.png"
-          sizes="192x192"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          href="/android-chrome-512x512.png"
-          sizes="512x512"
-        />
       </head>
-      <body className={`${archivo.variable}  antialiased`}>
+      <body className={`${libreBodoni.variable} antialiased`}>
         <Topbar />
         {children}
         <Footer />

@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #414740;
-  --foreground: #171717;
-  --font-color-main: #ededed; /* Main font color */
-  --font-color-second: #414740; /* Secondary font color */
+  --background: #e0e0da;
+  --foreground: #2a2829;
+  --font-color-main: #2a2829; /* Main font color */
+  --font-color-second: #ffffff; /* Secondary font color */
 }
 
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-archivo-sans), Arial, Helvetica, sans-serif; /* Use your Archivo font */
+  font-family: var(--font-libre-bodoni), serif; 
   -webkit-font-smoothing: antialiased; /* Smooth text for WebKit browsers */
   -moz-osx-font-smoothing: grayscale; /* Smooth text for macOS */
 }
