@@ -1,47 +1,43 @@
-import { Libre_Bodoni } from "next/font/google"; // Import Libre Bodoni
 import "./globals.css";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 
 // Import Archivo fonts
-const libreBodoni = Libre_Bodoni({
-  variable: "--font-libre-bodoni", // Update variable name
-  subsets: ["latin"],
-  weight: ["400", "500", "700"], // Specify weights available for Libre Bodoni
-});
 
 export const metadata = {
   title: {
     default: "MiniMax",
-    template: "%s - TFT Fasteign - Sumarhús", // Dynamic title templates
+    template: "%s - MiniMax - Bókhaldsþjónusta", // Dynamic title templates
   },
-  description: "Frábær timburhús tilbúin til byggingar",
+  description:
+    "Fagleg og áreiðanleg bókhaldsþjónusta fyrir einstaklinga og fyrirtæki",
   keywords: [
-    "sumarhús",
-    "vistvæn timburhús",
-    "byggingar",
-    "TFT Fasteign",
-    "Home made",
-    "Summerhouse",
-    "Búa til mitt sumarhús",
+    "bókhald",
+    "bókhaldsþjónusta",
+    "skattskil",
+    "MiniMax",
+    "fjármál",
+    "reikningsskil",
+    "bókhaldsstofa",
+    "fyrirtækjaþjónusta",
   ],
-  authors: [{ name: "TFT Fasteign", url: "https://tftfasteign.is" }],
-  creator: "TFT Fasteign",
-  publisher: "TFT Fasteign",
+  authors: [{ name: "MiniMax", url: "https://minimax.is" }],
+  creator: "MiniMax",
+  publisher: "MiniMax",
   openGraph: {
-    siteName: "TFT Fasteign",
+    siteName: "MiniMax",
     locale: "is_IS", // Icelandic locale
     type: "website",
-    url: "https://tftfasteign.is",
-    title:
-      "TFT Fasteign - Sumarhús, Vistvæn timburhús, Tilbúin til uppsetningar",
-    description: "Frábær timburhús tilbúin til byggingar",
+    url: "https://minimax.is",
+    title: "MiniMax - Fagleg bókhaldsþjónusta",
+    description:
+      "Fagleg og áreiðanleg bókhaldsþjónusta fyrir einstaklinga og fyrirtæki",
     images: [
       {
-        url: "https://firebasestorage.googleapis.com/v0/b/whitelotus-23.appspot.com/o/TFT-Fasteign%2Fsumarhus-fasteign.jpg?alt=media&token=9ec186cb-964c-473d-a418-b2ffe949b53e", // Replace with your Open Graph image URL
+        url: "/desk.jpg", // Using the desk image from the WhoWeAre component
         width: 1200,
         height: 630,
-        alt: "TFT Fasteign Sumarhús",
+        alt: "MiniMax Bókhaldsþjónusta",
       },
     ],
   },
@@ -51,7 +47,7 @@ export const metadata = {
     follow: true,
   },
   viewport: "width=device-width, initial-scale=1.0", // Mobile responsiveness
-  themeColor: "#414740",
+  themeColor: "#2a2829",
 };
 
 export default function RootLayout({ children }) {
@@ -74,7 +70,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={`${libreBodoni.variable} antialiased`}>
+      <body className={`font-elisabethische antialiased`}>
         <Topbar />
         {children}
         <Footer />

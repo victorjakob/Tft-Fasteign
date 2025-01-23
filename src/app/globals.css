@@ -10,10 +10,19 @@
 }
 
 
+
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-libre-bodoni), serif; 
+  font-family: var(--font-elisabethische), serif; 
   -webkit-font-smoothing: antialiased; /* Smooth text for WebKit browsers */
   -moz-osx-font-smoothing: grayscale; /* Smooth text for macOS */
+}
+
+
+@font-face {
+  font-family: "Elisabethische"; /* The name of the font */
+  src: url("/fonts/Elisabethische-Regular.ttf") format("truetype"); /* Path to the font file */
+  font-weight: normal; /* Adjust weight if applicable */
+  font-style: normal;  /* Adjust style if applicable */
 }

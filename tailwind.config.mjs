@@ -13,6 +13,9 @@ export default {
         main: "var(--font-color-main)",
         second: "var(--font-color-second)",
       },
+      fontFamily: {
+        elisabethische: ['"Elisabethische"', "serif"], // Add your font and a fallback
+      },
     },
   },
   plugins: [],
