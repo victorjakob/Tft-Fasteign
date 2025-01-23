@@ -2,15 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Topbar() {
   const navLinks = [
-    { name: "Heim", href: "/" },
-
-    { name: "Þjónustur", href: "/services" },
-    { name: "Um okkur", href: "/about" },
-    { name: "Hafðu Samband", href: "/contact" },
+    { name: "HEIM", href: "/" },
+    { name: "HÚSIN OKKAR", href: "/sumarhus" },
+    { name: "HAFA SAMBAND", href: "/contact" },
   ];
 
   const [isAtTop, setIsAtTop] = useState(true);
@@ -32,26 +31,32 @@ export default function Topbar() {
     <>
       {/* Topbar */}
       <div
-        className={`navbar fixed top-0 z-50 w-full bg-background text-main transition-all duration-300 ${
+        className={`navbar text-main w-full fixed top-0 z-50 transition-all duration-300 ${
           isAtTop ? "h-28" : "h-20"
         }`}
       >
         {/* Main Parent Container */}
-        <div className="container mx-auto flex h-full w-[90%] items-center justify-between px-5">
+        <div className="container mx-auto w-[90%] h-full flex justify-between items-center px-5 border-b border-current">
           {/* Logo Section */}
-          <Link href="/" className="flex h-full flex-shrink-0 items-center">
-            <h1 className="text-4xl font-extralight tracking-tighter">
-              MiniMax
-            </h1>
+          <Link href="/" className="flex-shrink-0 h-full flex items-center">
+            <Image
+              src="/tft-fasteign-logo.png"
+              alt="Logo"
+              width={150}
+              height={75}
+              className={`transition-transform duration-300 ${
+                isAtTop ? "scale-100" : "scale-75"
+              }`}
+            />
           </Link>
 
           {/* Navigation Links */}
-          <nav className="hidden items-center space-x-10 md:flex">
+          <nav className="hidden md:flex items-center space-x-10">
             {navLinks.map((link, index) => (
               <Link
                 key={index}
                 href={link.href}
-                className="relative pl-3 text-base font-extralight tracking-wide transition-all after:absolute after:-bottom-4 after:left-1/2 after:h-[2px] after:w-[80%] after:origin-center after:-translate-x-1/2 after:scale-x-0 after:transform after:bg-current after:transition-transform after:duration-300 after:content-[''] hover:pl-1 hover:tracking-widest hover:text-gray-700 hover:after:scale-x-100"
+                className="text-sm font-medium hover:text-gray-300 tracking-wider relative after:content-[''] after:absolute after:w-[80%] after:h-[2px] after:bg-current after:left-1/2 after:transform after:-translate-x-1/2 after:-bottom-4 after:scale-x-0 hover:after:scale-x-100 after:origin-center after:transition-transform after:duration-300"
               >
                 {link.name}
               </Link>
@@ -60,7 +65,7 @@ export default function Topbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="text-main focus:outline-none md:hidden"
+            className="md:hidden text-main focus:outline-none"
             onClick={() => setIsSidebarOpen(true)}
           >
             <svg
@@ -80,7 +85,7 @@ export default function Topbar() {
 
       {/* Mobile Sidebar */}
       <motion.div
-        className="fixed right-0 top-0 z-50 h-full w-64 bg-background shadow-lg"
+        className="fixed top-0 right-0 h-full w-64 bg-background shadow-lg z-50"
         initial={{ x: "100%" }}
         animate={{ x: isSidebarOpen ? 0 : "100%" }}
         transition={{ type: "tween", duration: 0.3 }}
@@ -89,10 +94,10 @@ export default function Topbar() {
           <button
             aria-label="Close mobile menu"
             onClick={() => setIsSidebarOpen(false)}
-            className="text-main transition-colors hover:text-gray-300"
+            className="text-main hover:text-gray-300 transition-colors"
           >
             <svg
-              className="mr-7 mt-7 h-6 w-6"
+              className="h-6 w-6 mt-7 mr-7"
               fill="none"
               stroke="currentColor"
               strokeLinecap="round"
@@ -104,12 +109,12 @@ export default function Topbar() {
             </svg>
           </button>
         </div>
-        <nav className="space-y-4 p-5">
+        <nav className="p-5 space-y-4">
           {navLinks.map((link, index) => (
             <motion.a
               key={index}
               href={link.href}
-              className="block text-lg font-medium text-main transition-colors hover:text-gray-300"
+              className="block text-main text-lg font-medium hover:text-gray-300 transition-colors"
               onClick={() => setIsSidebarOpen(false)}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -119,7 +124,7 @@ export default function Topbar() {
             </motion.a>
           ))}
         </nav>
-        <div className="absolute bottom-0 w-full border-t border-current p-5 text-center text-sm">
+        <div className="absolute bottom-0 w-full p-5 border-t border-current text-center text-sm">
           <p>© 2025 TFT Fasteign™</p>
         </div>
       </motion.div>
@@ -127,7 +132,7 @@ export default function Topbar() {
       {/* Overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black bg-opacity-50"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
           onClick={() => setIsSidebarOpen(false)}
         ></div>
       )}

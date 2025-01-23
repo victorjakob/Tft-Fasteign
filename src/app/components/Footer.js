@@ -3,57 +3,57 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-foreground bg-background text-main shadow">
-      <div className="mx-auto w-full max-w-[90%] p-4 md:p-6 md:py-8">
-        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+    <footer className="bg-background rounded-lg shadow text-main">
+      <div className="w-full max-w-[90%] mx-auto p-6 md:py-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           {/* Logo Section */}
-          <Link href="/" className="flex justify-center md:justify-start">
-            <h1 className="text-3xl font-extralight tracking-tighter md:text-4xl">
-              MiniMax
-            </h1>
+          <Link
+            href="/"
+            className="flex justify-center sm:justify-start items-center mb-4 sm:mb-0"
+          >
+            <Image
+              src="/tft-fasteign-logo.png"
+              alt="TFT Fasteign Logo"
+              width={150}
+              height={75}
+              className="h-14 md:h-16 object-contain"
+              priority
+            />
           </Link>
 
           {/* Links Section */}
-          <div className="flex flex-col items-center space-y-3 md:mb-0 md:space-y-2">
+          <div className="flex flex-col items-center sm:items-center mb-4 sm:mb-0 space-y-2">
             <Link
-              href="/services"
-              className="text-base hover:underline md:text-sm"
+              href="/sumarhus"
+              className="hover:underline text-sm md:text-base"
             >
-              Þjónustur
-            </Link>
-            <Link
-              href="/about"
-              className="text-base hover:underline md:text-sm"
-            >
-              Um okkur
+              Húsin okkar
             </Link>
             <Link
               href="/contact"
-              className="text-base hover:underline md:text-sm"
+              className="hover:underline text-sm md:text-base"
             >
               Hafa samband
             </Link>
           </div>
 
           {/* Contact Information */}
-          <div className="flex flex-col items-center space-y-2 text-center md:items-end md:space-y-1 md:text-right">
-            <p className="text-sm md:text-xs">
-              Studio E8
-              <br /> Engihjalli 8<br />
-              200 Kópavogur
+          <div className="flex flex-col items-center sm:items-end space-y-1 text-center sm:text-right">
+            <p className="text-xs md:text-sm">
+              Studio E8, Engihjalli 8, 200 Kópavogur
             </p>
-            <p className="text-sm md:text-xs">+354 547 2211</p>
-            <p className="text-sm md:text-xs">fyrirspurn@minimax.is</p>
+            <p className="text-xs md:text-sm">+354 897 2833</p>
+            <p className="text-xs md:text-sm">GunnarBachmann1@gmail.com</p>
           </div>
         </div>
 
         <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
 
         {/* Copyright Section */}
-        <span className="block text-center text-sm md:text-xs">
-          © 2003{" "}
-          <Link href="/" className="font-semibold hover:underline">
-            MiniMax™
+        <span className="block text-xs md:text-sm text-center">
+          © 2025{" "}
+          <Link href="/" className="hover:underline font-semibold">
+            TFT Fasteign™
           </Link>
           . All Rights Reserved.
         </span>
