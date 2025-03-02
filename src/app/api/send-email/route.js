@@ -17,8 +17,8 @@ export async function POST(req) {
     }
 
     const msg = {
-      to: "viggijakob@gmail.com", // Your verified email
-      from: "viggijakob@gmail.com", // Use your verified sender email
+      to: "gunnarbachmann1@gmail.com", // Your verified email
+      from: "gunnarbachmann1@gmail.com", // Use your verified sender email
       replyTo: email, // The user's email for reply
       subject: `New Message from ${name}`, // Dynamic subject line
       text: message,
