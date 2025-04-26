@@ -95,7 +95,7 @@ export default function Qualities() {
           >
             <h3 className="text-3xl md:text-4xl font-bold text-second">GÆÐI</h3>
             <ul className="mt-7 tracking-widest font-normal mb-7 space-y-2">
-              <li>Húsin eru öll smíðuð úr vottuðu timbri</li>
+              <li>Húsin eru öll smíðuð úr vottuðu Sænsku timbri</li>
               <li>Teikningar fylgja</li>
               <li>Smíða-, pípulagninga- og raflagnateikningar</li>
               <li>Húsin geta bæði farið á stöpla eða á steypta plötu</li>

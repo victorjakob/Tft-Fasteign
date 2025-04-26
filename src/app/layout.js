@@ -2,7 +2,6 @@ import { Archivo } from "next/font/google"; // Replace with Archivo
 import "./globals.css";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
-import { Analytics } from "@vercel/analytics/react";
 
 // Import Archivo fonts
 const archivo = Archivo({
@@ -125,8 +124,6 @@ export default function RootLayout({ children }) {
       <body className={`${archivo.variable}  antialiased`}>
         <Topbar />
         {children}
-        <Analytics />
-
         <Footer />
       </body>
     </html>

@@ -36,7 +36,7 @@ export default function Myvatn() {
             <li>1 Baðherbergi með sturtu</li>
             <li>Eldhús með innréttingum og tækjum</li>
             <li>Einhalli á þaki</li>
-            <li>Sérhannað eftir þörf</li>
+            <li>Sérhannað eftir þörfum</li>
           </ul>
         </div>
       </div>

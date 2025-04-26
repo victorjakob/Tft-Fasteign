@@ -38,7 +38,7 @@ export default function Langavatn() {
             <li>1-2 Baðherbergi með sturtu</li>
             <li>Eldhús með innréttingum og tækjum</li>
             <li>Einhalli eða tvíhalli á þaki</li>
-            <li>Sérhannað eftir þörf</li>
+            <li>Sérhannað eftir þörfum</li>
             <li>Lengd og breidd hússins breytanleg</li>
           </ul>
         </div>

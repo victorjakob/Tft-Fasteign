@@ -14,7 +14,7 @@ export default function HeroSumarhus() {
     >
       <h1 className="text-3xl md:text-5xl lg:text-6xl font-light leading-snug tracking-wide">
         Vönduð Sumarhús <br />
-        <span className="italic">eftir þinni þörf</span>
+        <span className="italic">eftir þínum þörfum</span>
       </h1>
       <span className="text-sm md:text-lg mt-4 md:mt-8">
         Einfalt og auðvelt ferli frá draumi til veruleika{" "}
