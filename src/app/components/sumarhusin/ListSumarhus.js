@@ -57,7 +57,7 @@ export default function ListSumarhus() {
               MÝVATN
             </h3>
             <span className="text-xl text-slate-600 block mt-2">28 m²</span>
-            <ul className="mt-7 tracking-widest font-light mb-7 space-y-2">
+            <ul className="mt-7 text-slate-800 tracking-widest font-light mb-7 space-y-2">
               <li>1 Svefnherbergi</li>
               <li>1 Baðherbergi með sturtu</li>
               <li>Eldhús með innréttingum og tækjum</li>
@@ -107,7 +107,7 @@ export default function ListSumarhus() {
               LANGAVATN
             </h3>
             <span className="text-xl text-slate-600 block mt-2">55-120 m²</span>
-            <ul className="mt-7 tracking-widest font-light mb-7 space-y-2">
+            <ul className="mt-7 text-slate-800 tracking-widest font-light mb-7 space-y-2">
               <li>1-3 Svefnherbergi</li>
               <li>1-2 Baðherbergi með sturtu</li>
               <li>Eldhús með innréttingum og tækjum</li>

@@ -94,7 +94,7 @@ export default function Qualities() {
             variants={fadeInVariant("right")}
           >
             <h3 className="text-3xl md:text-4xl font-bold text-second">GÆÐI</h3>
-            <ul className="mt-7 tracking-widest font-normal mb-7 space-y-2">
+            <ul className="mt-7 text-slate-800 tracking-widest font-normal mb-7 space-y-2">
               <li>Húsin eru öll smíðuð úr vottuðu Sænsku timbri</li>
               <li>Teikningar fylgja</li>
               <li>Smíða-, pípulagninga- og raflagnateikningar</li>
@@ -138,7 +138,7 @@ export default function Qualities() {
             <h3 className="text-3xl md:text-4xl font-bold text-second">
               INNIFALIÐ
             </h3>
-            <ul className="mt-7 tracking-widest font-light mb-7 space-y-2">
+            <ul className="mt-7 text-slate-800 tracking-widest font-light mb-7 space-y-2">
               <li>Harðparket á golf</li>
               <li>Klæðning á veggi innanhúss</li>
               <li className="font-bold text-xl"> Eldhús</li>
@@ -185,7 +185,7 @@ export default function Qualities() {
             ÞITT VAL
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid text-slate-800 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
                 title: "Veggklæðning",

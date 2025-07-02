@@ -9,6 +9,7 @@ export default function Topbar() {
   const navLinks = [
     { name: "HEIM", href: "/" },
     { name: "HÚSIN OKKAR", href: "/sumarhus" },
+    { name: "SAUNA", href: "/saunas" },
     { name: "HAFA SAMBAND", href: "/contact" },
   ];
 
@@ -44,9 +45,10 @@ export default function Topbar() {
               alt="Logo"
               width={150}
               height={75}
-              className={`transition-transform duration-300 ${
+              className={`transition-transform duration-300 w-auto h-auto ${
                 isAtTop ? "scale-100" : "scale-75"
               }`}
+              priority
             />
           </Link>
 

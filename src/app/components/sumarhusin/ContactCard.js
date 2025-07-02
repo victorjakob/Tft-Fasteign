@@ -22,7 +22,7 @@ export default function ContactCard() {
                 src="/tft-fasteign-logo.png"
                 alt="Company Logo"
                 fill
-                className="object-contain"
+                className="object-contain w-auto h-auto"
               />
             </div>
           </div>

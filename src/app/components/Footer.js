@@ -16,13 +16,16 @@ export default function Footer() {
               alt="TFT Fasteign Logo"
               width={150}
               height={75}
-              className="h-14 md:h-16 object-contain"
+              className="h-14 md:h-16 w-auto object-contain"
               priority
             />
           </Link>
 
           {/* Links Section */}
-          <div className="flex flex-col items-center sm:items-center mb-4 sm:mb-0 space-y-2">
+          <nav
+            aria-label="Footer"
+            className="flex flex-col items-center sm:items-center mb-4 sm:mb-0 space-y-2"
+          >
             <Link
               href="/sumarhus"
               className="hover:underline text-sm md:text-base"
@@ -30,21 +33,36 @@ export default function Footer() {
               Húsin okkar
             </Link>
             <Link
+              href="/saunas"
+              className="hover:underline text-sm md:text-base"
+            >
+              Saunur
+            </Link>
+            <Link
               href="/contact"
               className="hover:underline text-sm md:text-base"
             >
               Hafa samband
             </Link>
-          </div>
+          </nav>
 
           {/* Contact Information */}
-          <div className="flex flex-col items-center sm:items-end space-y-1 text-center sm:text-right">
-            <p className="text-xs md:text-sm">
-              Studio E8, Engihjalli 8, 200 Kópavogur
-            </p>
-            <p className="text-xs md:text-sm">+354 897 2833</p>
-            <p className="text-xs md:text-sm">GunnarBachmann1@gmail.com</p>
-          </div>
+          <address className="flex flex-col items-center sm:items-end space-y-1 text-center sm:text-right not-italic">
+            <div>Studio E8, Engihjalli 8, 200 Kópavogur</div>
+            <div>
+              <a href="tel:+3548972833" className="hover:underline">
+                +354 897 2833
+              </a>
+            </div>
+            <div>
+              <a
+                href="mailto:GunnarBachmann1@gmail.com"
+                className="hover:underline"
+              >
+                GunnarBachmann1@gmail.com
+              </a>
+            </div>
+          </address>
         </div>
 
         <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />

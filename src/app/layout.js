@@ -3,6 +3,15 @@ import "./globals.css";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
 
+// Export viewport separately for Next.js app directory
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
+// Export themeColor separately for Next.js app directory
+export const themeColor = "#414740";
+
 // Import Archivo fonts
 const archivo = Archivo({
   variable: "--font-archivo-sans",
@@ -11,6 +20,7 @@ const archivo = Archivo({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://www.tft.is"),
   title: {
     default:
       "TFT Fasteign - Sumarhús, Vistvæn timburhús, Tilbúin til uppsetningar",
@@ -51,8 +61,6 @@ export const metadata = {
     index: true,
     follow: true,
   },
-  viewport: "width=device-width, initial-scale=1.0", // Mobile responsiveness
-  themeColor: "#414740",
 };
 
 export default function RootLayout({ children }) {

@@ -4,7 +4,7 @@
 
 :root {
   --background: #414740;
-  --foreground: #171717;
+  --foreground: #FCF8ED;
   --font-color-main: #ededed; /* Main font color */
   --font-color-second: #414740; /* Secondary font color */
 }
@@ -16,4 +16,8 @@ body {
   font-family: var(--font-archivo-sans), Arial, Helvetica, sans-serif; /* Use your Archivo font */
   -webkit-font-smoothing: antialiased; /* Smooth text for WebKit browsers */
   -moz-osx-font-smoothing: grayscale; /* Smooth text for macOS */
+}
+
+html {
+  scroll-behavior: smooth;
 }
