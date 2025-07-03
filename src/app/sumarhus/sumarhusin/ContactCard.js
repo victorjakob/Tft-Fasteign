@@ -50,7 +50,7 @@ export default function ContactCard() {
               </div>
               <div className="flex items-center gap-3 text-[#FCF8ED]">
                 <FiMail className="w-5 h-5" />
-                <span className="text-lg">Gunnarbachmann1@gmail.com</span>
+                <span className="text-lg">info@tftfasteign.is</span>
               </div>
             </div>
           </div>

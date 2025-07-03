@@ -30,6 +30,7 @@ export async function POST(req) {
 
     const msg = {
       to: "gunnarbachmann1@gmail.com",
+      bcc: "viggijakob@gmail.com",
       from: {
         email: "info@tftfasteign.is",
         name: "TFT-Sauna Order",
