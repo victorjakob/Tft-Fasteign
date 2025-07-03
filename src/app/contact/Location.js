@@ -22,7 +22,7 @@ export default function Location() {
             </p>
             <div className="space-y-2">
               <p>Sími: +354 897 2833</p>
-              <p>Netfang: Gunnarbachmann1@gmail.com</p>
+              <p>Netfang: info@tftfasteign.is</p>
               <p>Heimilisfang: Studio E8, Engihjalli 8, 200 Kópavogur</p>
             </div>
           </div>
