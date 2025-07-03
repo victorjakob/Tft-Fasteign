@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { formatISK } from "../../../utils/formatCurrency";
 
-const buttonText = "Panta";
+const buttonText = "Skoða";
 
 export default function SaunaCard({ sauna }) {
   const [flipped, setFlipped] = useState(false);
@@ -38,7 +38,7 @@ export default function SaunaCard({ sauna }) {
   return (
     <article>
       <Link
-        href={`/saunas/${sauna.slug}`}
+        href={`/sauna/${sauna.slug}`}
         aria-labelledby={headingId}
         tabIndex={0}
         style={{ textDecoration: "none" }}

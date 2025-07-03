@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: sauna.name + " | Sauna til sölu | TFT Fasteign",
       description: sauna.description,
-      url: `https://www.tft.is/saunas/${sauna.slug}`,
+      url: `https://www.tft.is/sauna/${sauna.slug}`,
       images: [
         {
           url: sauna.image_url,
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }) {
       images: [sauna.image_url],
     },
     alternates: {
-      canonical: `https://www.tft.is/saunas/${sauna.slug}`,
+      canonical: `https://www.tft.is/sauna/${sauna.slug}`,
     },
   };
 }
@@ -98,7 +98,7 @@ export default async function SaunaProductPage({ params }) {
             price: sauna.base_price,
             priceCurrency: "ISK",
             availability: "https://schema.org/InStock",
-            url: `https://www.tft.is/saunas/${sauna.slug}`,
+            url: `https://www.tft.is/sauna/${sauna.slug}`,
           },
         })}
       </Script>

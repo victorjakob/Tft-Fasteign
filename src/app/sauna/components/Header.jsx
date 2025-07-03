@@ -55,7 +55,7 @@ export default function SaunaHeader() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
       >
-        Uppgötvaðu úrval af hágæða sölusaunum <br />
+        Uppgötvaðu úrval af hágæða saunum <br />
         Umhverfisvottað Sænskt timbur, Koma með öllu inniföldu.
       </motion.p>
     </header>

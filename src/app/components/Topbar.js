@@ -4,15 +4,10 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Topbar() {
-  const navLinks = [
-    { name: "HEIM", href: "/" },
-    { name: "HÚSIN OKKAR", href: "/sumarhus" },
-    { name: "SAUNA", href: "/saunas" },
-    { name: "HAFA SAMBAND", href: "/contact" },
-  ];
-
+  const pathname = usePathname();
   const [isAtTop, setIsAtTop] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -27,6 +22,15 @@ export default function Topbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  if (pathname === "/") return null;
+
+  const navLinks = [
+    { name: "HEIM", href: "/" },
+    { name: "HÚSIN OKKAR", href: "/sumarhus" },
+    { name: "SAUNA", href: "/sauna" },
+    { name: "HAFA SAMBAND", href: "/contact" },
+  ];
 
   return (
     <>

@@ -1,7 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname === "/") return null;
+
   return (
     <footer className="bg-background rounded-lg shadow text-main">
       <div className="w-full max-w-[90%] mx-auto p-6 md:py-8">
@@ -33,7 +39,7 @@ export default function Footer() {
               Húsin okkar
             </Link>
             <Link
-              href="/saunas"
+              href="/sauna"
               className="hover:underline text-sm md:text-base"
             >
               Saunur

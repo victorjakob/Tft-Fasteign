@@ -1,5 +1,5 @@
-import HeroSumarhus from "../components/sumarhusin/Hero";
-import ListSumarhus from "../components/sumarhusin/ListSumarhus";
+import HeroSumarhus from "./sumarhusin/Hero";
+import ListSumarhus from "./sumarhusin/ListSumarhus";
 
 export default function Sumarhus() {
   return (

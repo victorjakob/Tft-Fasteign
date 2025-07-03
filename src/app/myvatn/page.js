@@ -1,7 +1,7 @@
-import ContactCard from "../components/sumarhusin/ContactCard";
-import MyvatnInfo from "../components/sumarhusin/Myvatn";
-import Price from "../components/sumarhusin/PriceMyvatn";
-import Qualities from "../components/sumarhusin/Qualities";
+import ContactCard from "../sumarhus/sumarhusin/ContactCard";
+import MyvatnInfo from "../sumarhus/sumarhusin/Myvatn";
+import Price from "../sumarhus/sumarhusin/PriceMyvatn";
+import Qualities from "../sumarhus/sumarhusin/Qualities";
 
 export default function Myvatn() {
   return (

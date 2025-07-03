@@ -13,7 +13,7 @@ export const generateMetadata = () => ({
     title: "Saunur til sölu | Topp gæði og frábært verð",
     description:
       "Skoðaðu úrvalið af vönduðum saunum hjá TFT Fasteign. Hágæða saunur á frábæru verði. Pantaðu þína saunu í dag!",
-    url: "https://www.tft.is/saunas",
+    url: "https://www.tft.is/sauna",
     siteName: "TFT Fasteign",
     images: [
       {
@@ -36,7 +36,7 @@ export const generateMetadata = () => ({
     ],
   },
   alternates: {
-    canonical: "https://www.tft.is/saunas",
+    canonical: "https://www.tft.is/sauna",
   },
 });
 
@@ -82,7 +82,7 @@ export default async function SaunasPage() {
             name: sauna.name,
             description: sauna.description,
             image: sauna.image_url,
-            url: `https://www.tft.is/saunas/${sauna.slug}`,
+            url: `https://www.tft.is/sauna/${sauna.slug}`,
             offers: {
               "@type": "Offer",
               price: sauna.base_price,
