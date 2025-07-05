@@ -1,6 +1,13 @@
 import sgMail from "@sendgrid/mail";
+import { createClient } from "@supabase/supabase-js";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+// Create a Supabase client with service role key for server-side DB writes
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
 export async function POST(req) {
   try {
@@ -64,18 +71,44 @@ export async function POST(req) {
 
     await sgMail.send(msg);
 
+    // Insert order into Supabase DB
+    const { error: dbError } = await supabase.from("tft_sauna_order").insert([
+      {
+        name,
+        email,
+        phone,
+        comment,
+        sauna,
+        selected_addons: selectedAddons,
+        total_price: totalPrice,
+      },
+    ]);
+
+    if (dbError) {
+      console.error("Error saving sauna order to DB:", dbError);
+      return new Response(
+        JSON.stringify({ error: "Failed to save order to database." }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
     return new Response(
-      JSON.stringify({ message: "Order email sent successfully!" }),
+      JSON.stringify({ message: "Order email sent and saved successfully!" }),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
       }
     );
   } catch (error) {
-    console.error("Error sending sauna order email:", error);
+    console.error("Error sending sauna order email or saving to DB:", error);
 
     return new Response(
-      JSON.stringify({ error: "Failed to send order email." }),
+      JSON.stringify({
+        error: "Failed to send order email or save to database.",
+      }),
       {
         status: 500,
         headers: { "Content-Type": "application/json" },

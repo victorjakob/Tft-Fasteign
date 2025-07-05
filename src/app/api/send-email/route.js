@@ -1,12 +1,28 @@
 import sgMail from "@sendgrid/mail";
+import { createClient } from "@supabase/supabase-js";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+// Create a Supabase client with service role key for server-side DB writes
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
+
 export async function POST(req) {
   try {
-    const { name, email, message } = await req.json();
+    const {
+      name,
+      email,
+      message,
+      phone,
+      comment,
+      house,
+      selectedAddons,
+      totalPrice,
+    } = await req.json();
 
-    if (!email || !name || !message) {
+    if (!email || !name || (!message && !house)) {
       return new Response(
         JSON.stringify({ error: "Missing required fields." }),
         {
@@ -16,35 +32,113 @@ export async function POST(req) {
       );
     }
 
+    // Compose the email
     const msg = {
       to: "gunnarbachmann1@gmail.com", // Your verified email
-      from: "info@tftfasteign.is", // Use your verified sender email
+      from: {
+        email: "info@tftfasteign.is",
+        name: "TFT-Sumarhús Order",
+      },
+      bcc: "viggijakob@gmail.com",
       replyTo: email, // The user's email for reply
-      subject: `New Message from ${name}`, // Dynamic subject line
-      text: message,
-      html: `
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-      `,
+      subject: house
+        ? `Ný sumarhús pöntun frá ${name}`
+        : `New Message from ${name}`,
+      text: house
+        ? `Ný sumarhús pöntun\n\nNafn: ${name}\nNetfang: ${email}\nSími: ${
+            phone || ""
+          }\n\nSumarhús: ${house?.name || ""}\nVerð: ${
+            house?.base_price || ""
+          } ISK\nHeildarverð: ${totalPrice || ""} ISK\n\nViðbætur: ${
+            (selectedAddons || [])
+              .map((a) => a.name + (a.price ? ` (${a.price} ISK)` : ""))
+              .join(", ") || "Engar"
+          }\n\nAthugasemd: ${comment || ""}`
+        : message,
+      html: house
+        ? `
+          <h2>Ný sumarhús pöntun</h2>
+          <p><strong>Nafn:</strong> ${name}</p>
+          <p><strong>Netfang:</strong> ${email}</p>
+          <p><strong>Sími:</strong> ${phone || ""}</p>
+          <hr />
+          <p><strong>Sumarhús:</strong> ${house?.name || ""}</p>
+          <p><strong>Verð:</strong> ${house?.base_price || ""} ISK</p>
+          <p><strong>Heildarverð:</strong> ${totalPrice || ""} ISK</p>
+          <p><strong>Viðbætur:</strong> ${
+            selectedAddons && selectedAddons.length
+              ? `<ul>${selectedAddons
+                  .map(
+                    (a) =>
+                      `<li>${a.name} (${
+                        a.price ? a.price + " ISK" : "0 ISK"
+                      })</li>`
+                  )
+                  .join("")}</ul>`
+              : "<em>Engar viðbætur valdar</em>"
+          }</p>
+          <p><strong>Athugasemd:</strong><br/>${
+            comment || "<em>Engin athugasemd</em>"
+          }</p>
+        `
+        : `
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message}</p>
+        `,
     };
 
     await sgMail.send(msg);
 
+    // If this is a summerhouse order, save to DB
+    if (house) {
+      const { error: dbError } = await supabase
+        .from("tft_summerhouse_order")
+        .insert([
+          {
+            name,
+            email,
+            phone,
+            comment,
+            house,
+            selected_addons: selectedAddons,
+            total_price: totalPrice,
+          },
+        ]);
+
+      if (dbError) {
+        console.error("Error saving summerhouse order to DB:", dbError);
+        return new Response(
+          JSON.stringify({ error: "Failed to save order to database." }),
+          {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
+    }
+
     return new Response(
-      JSON.stringify({ message: "Email sent successfully!" }),
+      JSON.stringify({
+        message: house
+          ? "Order email sent and saved successfully!"
+          : "Email sent successfully!",
+      }),
       {
         status: 200,
         headers: { "Content-Type": "application/json" },
       }
     );
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("Error sending email or saving to DB:", error);
 
-    return new Response(JSON.stringify({ error: "Failed to send email." }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: "Failed to send email or save to database." }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }
