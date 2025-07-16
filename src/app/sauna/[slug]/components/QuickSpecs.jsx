@@ -34,16 +34,17 @@ export default function QuickSpecs({ sauna }) {
       value: sauna?.heaterType || "No information available",
       expandable: false,
     },
-    {
-      icon: <LayoutIcon className="w-8 h-8 text-green-700" />,
-      label: "Stærð og Mál",
-      value: (
-        <span className="text-gray-600">
-          {sauna?.size || "No size information available"}
-        </span>
-      ),
-      expandable: hasSizes,
-    },
+    // Only show "Stærð og Mál" if sauna.size or sauna.sizes exists
+    ...(sauna?.size || hasSizes
+      ? [
+          {
+            icon: <LayoutIcon className="w-8 h-8 text-green-700" />,
+            label: "Stærð og Mál",
+            value: <span className="text-gray-600">{sauna?.size}</span>,
+            expandable: hasSizes,
+          },
+        ]
+      : []),
   ];
 
   // Framer Motion variants for container and cards

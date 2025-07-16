@@ -29,7 +29,7 @@ export default function LogicalInfo({ sauna }) {
       label: "Uppsetning\nSauna afhent samsett",
       details: sauna?.setup?.trim()
         ? sauna.setup
-        : "Allar saunurnar okkar koma tilbúnar samsettar og eru auðveldar að setja upp. Við getum einnig boðið upp á uppsetningu á staðnum ef þess er óskað. Uppsetningin tekur venjulega um 2-3 klukkustundir.",
+        : "Allar saunurnar okkar koma tilbúnar samsettar og eru auðveldar að setja upp. Við getum einnig boðið upp á uppsetningu á staðnum ef þess er óskað. Uppsetningin tekur 1 dag fyrir 2 menn.  ",
     },
     {
       id: "standards",
@@ -43,7 +43,7 @@ export default function LogicalInfo({ sauna }) {
       icon: <Clock className="w-6 h-6 text-green-700" />,
       label: "Afhendingartími\nFrá samdægurs upp í 3 vikur",
       details:
-        "Við reynum að afhenda saunurnar okkar eins fljótt og mögulegt er. Venjulega getum við afhent innan 1-2 vikna, en þetta fer eftir núverandi pöntunum. Við höldum þig upplýstan um afhendingartímann þegar þú pantar.",
+        "Við reynum að afhenda saunurnar okkar eins fljótt og mögulegt er. Venjulega getum við afhent innan 1-2 vikna, en það fer eftir fyrirliggjandi pöntunum. Við munum láta þig vita um áætlaðan afhendingartíma þegar þú pantar.",
     },
     {
       id: "location",

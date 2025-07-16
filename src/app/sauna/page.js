@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { supabase } from "../../utils/supabaseClient";
 import SaunaCard from "./components/SaunaCard";
 import SaunaHeader from "./components/Header";
