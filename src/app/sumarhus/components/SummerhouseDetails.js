@@ -36,7 +36,7 @@ export default function SummerhouseDetails({
             {area}
           </span>
           {priceNoVsk && (
-            <span className="text-lg md:text-xl text-slate-100 font-extralight block mt-1 mb-2">
+            <span className="text-lg md:text-lg text-slate-200 font-extralight block mt-1 mb-2">
               Verð án vsk: {priceNoVsk.toLocaleString("is-IS")} kr.
             </span>
           )}
