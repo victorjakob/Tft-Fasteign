@@ -37,7 +37,7 @@ export default function ListSumarhus() {
             variants={fadeInVariant("left")}
           >
             <div className="group relative w-full h-full">
-              <Link href="/myvatn">
+              <Link href="/sumarhus/myvatn">
                 <Image
                   src="/sumarhus/sumarhus1.png"
                   alt="MYVATN"
@@ -65,7 +65,7 @@ export default function ListSumarhus() {
               <li>Sérhannað eftir þörfum</li>
             </ul>
             <Link
-              href="/myvatn"
+              href="/sumarhus/myvatn"
               className="flex justify-center md:justify-start items-center text-lg font-medium text-gray-800 hover:text-blue-600 hover:tracking-widest transition-all duration-300"
             >
               SKOÐA
@@ -87,7 +87,7 @@ export default function ListSumarhus() {
             variants={fadeInVariant("right")}
           >
             <div className="group relative w-full h-full">
-              <Link href="/langavatn">
+              <Link href="/sumarhus/langavatn">
                 <Image
                   src="/sumarhus/sumarhus2.png"
                   alt="LANGAVATN"
@@ -116,7 +116,7 @@ export default function ListSumarhus() {
               <li>Lengd og breidd er val</li>
             </ul>
             <Link
-              href="/langavatn"
+              href="/sumarhus/langavatn"
               className="flex justify-center md:justify-end items-center text-lg font-medium text-gray-800 hover:text-blue-600 hover:tracking-widest transition-all duration-300"
             >
               SKOÐA

@@ -45,24 +45,23 @@ export default function Price() {
 
           {/* Delivery Section */}
           <motion.div
-            className="w-full max-w-md mx-auto text-center md:text-left md:w-1/2 md:pl-4"
+            className="w-full max-w-md mx-auto text-center md:text-left md:w-1/2"
             variants={fadeInVariant("right")}
           >
-            <h3 className="text-3xl md:text-4xl font-medium text-white mb-4">
-              AFHENDING
-            </h3>
-            <div className="text-main text-lg">
+            <div className="text-main text-lg space-y-4">
+              <h3 className=" font-medium  text-3xl">Afhending</h3>
               <p>Miðast við á Hafnarbakka í Reykjavík</p>
               <p>Húsin eru ósamsett</p>
               <p className="pb-2">
                 Grind í útveggjum er forsmíðuð við afhendingu
               </p>
-              <h3 className="text-2xl font-medium mt-4">Samstarf</h3>
+              <h3 className="text-3xl font-medium">Samstarf</h3>
               <p>Smiðir sem setja saman húsin (Breyting ehf)</p>
               <p>
                 Kranaþjónusta tekur að sér að flytja og hýfa einingar á
                 endanlegum stað
               </p>
+              <p>- Við getum hjálpað þér með ferlið -</p>
             </div>
           </motion.div>
         </motion.div>

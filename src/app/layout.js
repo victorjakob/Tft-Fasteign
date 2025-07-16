@@ -2,6 +2,7 @@ import { Archivo } from "next/font/google"; // Replace with Archivo
 import "./globals.css";
 import Topbar from "./components/Topbar";
 import Footer from "./components/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 // Export viewport separately for Next.js app directory
 export const viewport = {
@@ -67,39 +68,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="is">
       <head>
-        {/* Google Analytics */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-VB19NHE62T"
-        ></script>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "TFT Fasteign",
-              url: "https://tftfasteign.is",
-              logo: "https://firebasestorage.googleapis.com/v0/b/whitelotus-23.appspot.com/o/TFT-Fasteign%2Fsumarhus-fasteign.jpg?alt=media&token=9ec186cb-964c-473d-a418-b2ffe949b53e",
-              contactPoint: {
-                "@type": "ContactPoint",
-                telephone: "+354-XXXXXXX",
-                contactType: "customer service",
-              },
-            }),
-          }}
-        />
-
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-VB19NHE62T');
-              `,
-          }}
-        />
         {/* Favicon links */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link
@@ -132,6 +100,7 @@ export default function RootLayout({ children }) {
       <body className={`${archivo.variable}  antialiased`}>
         <Topbar />
         {children}
+        <Analytics />
         <Footer />
       </body>
     </html>

@@ -12,6 +12,7 @@
     "@sendgrid/mail": "^8.1.4",
     "@supabase/supabase-js": "^2.49.8",
     "@tabler/icons-react": "^3.34.0",
+    "@vercel/analytics": "^1.5.0",
     "framer-motion": "^11.16.0",
     "lucide-react": "^0.511.0",
     "next": "15.1.3",
