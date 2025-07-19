@@ -79,7 +79,8 @@ export default function Price() {
                 Grind í útveggjum er forsmíðuð við afhendingu
               </p>
               <h3 className="text-2xl font-medium mt-4">Samstarf</h3>
-              <p>Smiðir sem setja saman húsin (Breyting ehf)</p>
+
+              <p>við getum útvegað uppsetningu á húsunum.</p>
               <p>
                 Kranaþjónusta tekur að sér að flytja og hýfa einingar á
                 endanlegum stað
