@@ -1,7 +1,7 @@
-import sgMail from "@sendgrid/mail";
+import { Resend } from "resend";
 import { createClient } from "@supabase/supabase-js";
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Create a Supabase client with service role key for server-side DB writes
 const supabase = createClient(
@@ -33,14 +33,11 @@ export async function POST(req) {
     }
 
     // Compose the email
-    const msg = {
-      to: "gunnarbachmann1@gmail.com", // Your verified email
-      from: {
-        email: "info@tftfasteign.is",
-        name: "TFT-Sumarhús Order",
-      },
-      bcc: "viggijakob@gmail.com",
-      replyTo: email, // The user's email for reply
+    const emailData = {
+      from: "TFT-Sumarhús Order <info@tftfasteign.is>",
+      to: ["gunnarbachmann1@gmail.com"],
+      bcc: ["viggijakob@gmail.com"],
+      replyTo: email,
       subject: house
         ? `Ný sumarhús pöntun frá ${name}`
         : `New Message from ${name}`,
@@ -89,7 +86,7 @@ export async function POST(req) {
         `,
     };
 
-    await sgMail.send(msg);
+    await resend.emails.send(emailData);
 
     // If this is a summerhouse order, save to DB
     if (house) {
