@@ -86,11 +86,10 @@ export async function POST(req) {
         `,
     };
 
-    await resend.emails.send(emailData);
-
-    // If this is a summerhouse order, save to DB
+    // If this is a summerhouse order, follow the error-proof flow
     if (house) {
-      const { error: dbError } = await supabase
+      // Step 1: Save to DB first (with email_sent: false)
+      const { data: orderData, error: dbError } = await supabase
         .from("tft_summerhouse_order")
         .insert([
           {
@@ -101,13 +100,56 @@ export async function POST(req) {
             house,
             selected_addons: selectedAddons,
             total_price: totalPrice,
+            email_sent: false,
           },
-        ]);
+        ])
+        .select();
 
       if (dbError) {
         console.error("Error saving summerhouse order to DB:", dbError);
         return new Response(
           JSON.stringify({ error: "Failed to save order to database." }),
+          {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      // Step 2: Send email
+      try {
+        await resend.emails.send(emailData);
+        console.log("Email sent successfully");
+      } catch (emailError) {
+        console.error("Error sending email:", emailError);
+        return new Response(
+          JSON.stringify({ error: "Failed to send email." }),
+          {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      // Step 3: Mark email as sent in DB
+      const { error: updateError } = await supabase
+        .from("tft_summerhouse_order")
+        .update({ email_sent: true })
+        .eq("id", orderData[0].id);
+
+      if (updateError) {
+        console.error("Error updating email_sent status:", updateError);
+        // Don't fail the request here, just log the error
+      }
+    } else {
+      // For regular contact form (not summerhouse order), just send email
+      try {
+        await resend.emails.send(emailData);
+        console.log("Email sent successfully");
+      } catch (emailError) {
+        console.error("Error sending email:", emailError);
+        return new Response(
+          JSON.stringify({ error: "Failed to send email." }),
           {
             status: 500,
             headers: { "Content-Type": "application/json" },

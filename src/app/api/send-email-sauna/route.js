@@ -66,20 +66,22 @@ export async function POST(req) {
       `,
     };
 
-    await resend.emails.send(emailData);
-
-    // Insert order into Supabase DB
-    const { error: dbError } = await supabase.from("tft_sauna_order").insert([
-      {
-        name,
-        email,
-        phone,
-        comment,
-        sauna,
-        selected_addons: selectedAddons,
-        total_price: totalPrice,
-      },
-    ]);
+    // Step 1: Save to DB first (with email_sent: false)
+    const { data: orderData, error: dbError } = await supabase
+      .from("tft_sauna_order")
+      .insert([
+        {
+          name,
+          email,
+          phone,
+          comment,
+          sauna,
+          selected_addons: selectedAddons,
+          total_price: totalPrice,
+          email_sent: false,
+        },
+      ])
+      .select();
 
     if (dbError) {
       console.error("Error saving sauna order to DB:", dbError);
@@ -90,6 +92,29 @@ export async function POST(req) {
           headers: { "Content-Type": "application/json" },
         }
       );
+    }
+
+    // Step 2: Send email
+    try {
+      await resend.emails.send(emailData);
+      console.log("Email sent successfully");
+    } catch (emailError) {
+      console.error("Error sending email:", emailError);
+      return new Response(JSON.stringify({ error: "Failed to send email." }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
+    // Step 3: Mark email as sent in DB
+    const { error: updateError } = await supabase
+      .from("tft_sauna_order")
+      .update({ email_sent: true })
+      .eq("id", orderData[0].id);
+
+    if (updateError) {
+      console.error("Error updating email_sent status:", updateError);
+      // Don't fail the request here, just log the error
     }
 
     return new Response(
