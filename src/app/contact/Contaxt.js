@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 export default function ContactForm() {
@@ -9,9 +9,9 @@ export default function ContactForm() {
     email: "",
     message: "",
   });
-  const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false); // Track success state
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,23 +27,14 @@ export default function ContactForm() {
       const data = await response.json();
 
       if (response.ok) {
-        setSuccess(true); // Set success state
-        setResponseMessage("Your message has been sent successfully!");
+        setShowSuccessModal(true);
         setFormData({ name: "", email: "", message: "" }); // Reset form data
-
-        // Revert success state after 3 seconds
-        setTimeout(() => {
-          setSuccess(false);
-          setResponseMessage(""); // Clear the response message
-        }, 3000);
       } else {
-        setResponseMessage(
-          data.error || "Failed to send the message. Please try again."
-        );
+        setShowErrorModal(true);
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      setResponseMessage("An error occurred. Please try again later.");
+      setShowErrorModal(true);
     } finally {
       setLoading(false);
     }
@@ -55,6 +46,14 @@ export default function ContactForm() {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const closeSuccessModal = () => {
+    setShowSuccessModal(false);
+  };
+
+  const closeErrorModal = () => {
+    setShowErrorModal(false);
   };
 
   return (
@@ -127,28 +126,123 @@ export default function ContactForm() {
 
             <button
               type="submit"
-              disabled={loading || success} // Disable when loading or success
-              className={`w-full tracking-widest py-3 px-6 rounded-md transition duration-200 font-medium ${
-                success
-                  ? "bg-green-500 text-white hover:bg-green-600"
-                  : "bg-[#2c73e5] text-white hover:bg-[#2054a8]"
-              }`}
+              disabled={loading}
+              className="w-full tracking-widest py-3 px-6 rounded-md transition duration-200 font-medium bg-[#2c73e5] text-white hover:bg-[#2054a8] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Sending..." : success ? "Success" : "SENDA"}
+              {loading ? "Sending..." : "SENDA"}
             </button>
-
-            {responseMessage && (
-              <p
-                className={`text-center text-sm mt-4 ${
-                  success ? "text-green-500" : "text-main"
-                }`}
-              >
-                {responseMessage}
-              </p>
-            )}
           </form>
         </motion.div>
       </div>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            onClick={closeSuccessModal}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="bg-white rounded-lg p-8 max-w-md mx-4 text-center shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="mb-4">
+                <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                  <svg
+                    className="w-8 h-8 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Skilaboð sent!
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Takk fyrir að hafa samband. Við munum svara þér eins fljótt og
+                mögulegt er.
+              </p>
+              <button
+                onClick={closeSuccessModal}
+                className="bg-[#2c73e5] text-white px-6 py-2 rounded-md hover:bg-[#2054a8] transition duration-200"
+              >
+                Loka
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Error Modal */}
+      <AnimatePresence>
+        {showErrorModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            onClick={closeErrorModal}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="bg-white rounded-lg p-8 max-w-md mx-4 text-center shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="mb-4">
+                <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
+                  <svg
+                    className="w-8 h-8 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Vandamál kom upp
+              </h3>
+              <p className="text-gray-600 mb-6">
+                Hafðu samband beint í email:{" "}
+                <a
+                  href="mailto:info@tftfasteign.is"
+                  className="text-[#2c73e5] hover:underline"
+                >
+                  info@tftfasteign.is
+                </a>
+              </p>
+              <button
+                onClick={closeErrorModal}
+                className="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition duration-200"
+              >
+                Loka
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
