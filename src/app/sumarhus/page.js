@@ -1,11 +1,5 @@
-import HeroSumarhus from "./components/Hero";
-import ListSumarhus from "./components/ListSumarhus";
+import { redirect } from "next/navigation";
 
-export default function Sumarhus() {
-  return (
-    <div>
-      <HeroSumarhus />
-      <ListSumarhus />
-    </div>
-  );
+export default function SumarhusPage() {
+  redirect("/");
 }
